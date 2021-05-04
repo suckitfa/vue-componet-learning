@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全局组件的使用</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 使用组件 -->
+        <button-counter />
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        // 定义组件
+        let MyComponent = Vue.extend({
+            template: `<button @click="count++">You click me {{count}} times.</button>`,
+            data: function() {
+                return {
+                    count: 0
+                }
+            }
+        });
+        // 在要使用的地方注册
+        Vue.component('button-counter', MyComponent);
+        const app = new Vue({
+            el: "#app",
+        });
+    </script>
+</body>
+
+</html>
