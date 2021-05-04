@@ -1,0 +1,22 @@
+{
+    "name": "vue-componet-learning",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "http-server -p 80"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/suckitfa/vue-componet-learning.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/suckitfa/vue-componet-learning/issues"
+    },
+    "homepage": "https://github.com/suckitfa/vue-componet-learning#readme",
+    "dependencies": {
+        "vue": "^2.6.12"
+    }
+}
