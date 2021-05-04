@@ -69,4 +69,77 @@ vue.js:634 [Vue warn]: Unknown custom element: <button-counter> - did you regist
 
 
 ### 组件的通信
-1. 使用props想子组件传递数据
+1. 使用props向子组件传递数据
+> - 组件当做自定义元素使用 => 借用元素的属性来通信()。
+>
+> - 在**组件**中定义props数组： <code style="padding:10px 10px; background:#000;color:#fff;">props:['postTitle']</code>
+>
+> - 要想传递多个值就定义多个prop, 或者传递对象将要传递的值封装咋对象中
+```js
+<body>
+    <div id="app">
+        <post-item post-title="Vue.js很强！" />
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        // 定义全局组件
+        Vue.component('post-item', {
+            // 使用props属性数组来接受父组件传递的值
+            props: ['postTitle'],
+            template: `<h3>{{postTitle}}</h3>`
+        });
+        const app = new Vue({
+            el: "#app"
+        });
+    </script>
+</body>
+```
+### 实际业务开发中，子组件通常是以对象来接受数据
+```html
+<body>
+    <div id="app">
+        <post-list />
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('post-item', {
+            props: ['post'],
+            template: `
+                <div>
+                    <h3>{{post.title}}</h3>
+                    <p>{{post.author}}</p>
+                    <p>{{post.content}}</p>
+                </div>
+            `
+        });
+        Vue.component('post-list', {
+            data() {
+                return {
+                    // 将多个值封装在对象post中
+                    post: {
+                        author: "刘博文",
+                        title: "Vue.js深入浅出",
+                        content: "这本书很牛逼！"
+                    }
+                }
+            },
+            template: `<div><post-item :post='post'/></div>`
+        })
+        const app = new Vue({
+            el: "#app",
+        });
+    </script>
+</body>
+```
+
+### props传递值的特点
+1. 单向传递数据，只能向被引用的一方传递数据。
+2. 数组和对象传递引用，子组件去更改数据会影响父组件的状态
+
+
+### 组件的验证机制（就是可以来验证传递过来的数据是否符合要求,而这个要求可以你来定义！）
+```js
+Vue.component({
+
+});
+```

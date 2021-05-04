@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件通信传递值</title>
+</head>
+
+<body>
+    <div id="app">
+        <post-list />
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('post-item', {
+            props: ['post'],
+            template: `
+                <div>
+                    <h3>{{post.title}}</h3>
+                    <p>{{post.author}}</p>
+                    <p>{{post.content}}</p>
+                </div>
+            `
+        });
+        Vue.component('post-list', {
+            data() {
+                return {
+                    // 将多个值封装在对象中
+                    post: {
+                        author: "刘博文",
+                        title: "Vue.js深入浅出",
+                        content: "这本书很牛逼！"
+                    }
+                }
+            },
+            template: `<div><post-item :post='post'/></div>`
+        })
+        const app = new Vue({
+            el: "#app",
+        });
+    </script>
+</body>
+
+</html>
